@@ -1,0 +1,8 @@
+<div id="account">
+  <div class="names">
+    {{ user?.firstName +  ' ' + user?.lastName | titlecase}}
+  </div>
+  <small>{{user?.emailAddress}}</small>
+
+  <button mat-raised-button color = "warn" (click) = "signOut()">Logout</button>
+</div>

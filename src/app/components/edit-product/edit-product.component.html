@@ -1,0 +1,62 @@
+<header>
+    <nav>
+        <div id="left">
+            <div>
+                MY WEB
+            </div>
+            <div id="vertical-rule"></div>
+            <ul>
+                <li>Edit Product</li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="profile" [matMenuTriggerFor]="menu">
+                <mat-icon>account_box</mat-icon>
+            </div>
+            <mat-menu #menu="matMenu">
+                <app-account></app-account>
+            </mat-menu>
+        </div>
+    </nav>
+</header>
+<div class="wrapper">
+    <main>
+        <form [formGroup]="productDetailsFormGroup">
+            <ng-template matStepLabel>Property Profile</ng-template>
+            <h4>Property Details</h4>
+
+            <div class="grid">
+                <mat-form-field appearance="outline">
+                    <mat-label>Property Code</mat-label>
+                    <input matInput formControlName="productCode">
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="AVAILABLE">
+                            AVAILABLE
+                        </mat-option>
+                        <mat-option value="NOT_AVAILABLE">
+                            NOT AVAILABLE
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Price</mat-label>
+                    <input matInput type="number" formControlName="price">
+
+                </mat-form-field>
+
+            </div>
+
+            <div>
+                <button mat-stroked-button (click)="updateProduct()">Save</button>
+            </div>
+        </form>
+    </main>
+</div>

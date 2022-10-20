@@ -1,0 +1,59 @@
+<div id="container">
+
+  <ng-container *ngIf="!loading; else elseTemplate">
+
+    <ng-container *ngIf="success; else orderResponseTemplate">
+      <div class="icon">
+        <mat-icon>
+          check_circle
+        </mat-icon>
+      </div>
+      <div id="message">
+        Congratulations your order has been fulfilled. An email with your voucher has been sent to your email.
+      </div>
+      <a class="link" target="_blank" href="https://www.perlego.com/group-register?orgt1=FL4hZdQ7AEBEc3d0kwHHuA==">
+        visit <span>www.perlego.com</span> to activate your voucher
+      </a>
+    </ng-container>
+    <ng-template #orderResponseTemplate>
+      <div class="icon red">
+        <mat-icon>
+          cancel
+        </mat-icon>
+      </div>
+      <div id="message">
+        Your order could not be fulfilled due to an unsuccessful payment.
+      </div>
+     
+      <a class="link" target="_blank" href="mailto:perlego@tutenterprise.co.za">
+        Click here to report if your payment was successful and you did not receive a voucher
+      </a>
+    </ng-template>
+
+
+
+    <button mat-button mat-dialog-close>Close</button>
+  </ng-container>
+
+
+  <ng-template #elseTemplate>
+    <div class="lds-default">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <p>Processing order</p>
+  </ng-template>
+
+
+</div>

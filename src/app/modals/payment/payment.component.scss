@@ -1,0 +1,67 @@
+#container{
+    width: 500px;
+}
+#header{
+    background: #060F1C;
+    height: 106px;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    .row-1{
+       text-align: right;
+    }
+
+    .row-2{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+
+        button{
+            background: linear-gradient(45deg, #FCA311, #FF2525);
+        }
+    }
+
+
+}
+
+#body{
+    padding: 0 20px 30px ;
+    h4{margin: 20px 0; font-weight: bold;}
+
+   #grid{
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 5px 40px;
+   }
+
+   mat-form-field{
+       width: 100%;
+   }
+
+   #checkout {
+    margin-top: 6px;
+    background: linear-gradient(45deg, #FCA311, #FF2525);
+    padding: 5px 60px;
+    color: #F5F4F2;
+    border-radius: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+
+    &:disabled{
+        background: #dddddd;
+    }
+    
+  }
+}
+#feedback{
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid #FCA311;
+}

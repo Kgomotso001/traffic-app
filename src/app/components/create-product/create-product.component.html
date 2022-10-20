@@ -1,0 +1,69 @@
+<header>
+    <nav>
+        <div id="left"> 
+            <div>
+                MY t-retail APP
+            </div>
+            <div id="vertical-rule"></div>
+            <ul>
+                <li>Report t-retail</li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="profile" [matMenuTriggerFor]="menu">
+                <mat-icon>account_box</mat-icon>
+            </div>
+            <mat-menu #menu="matMenu">
+                <app-account></app-account>
+            </mat-menu>
+        </div>
+    </nav>
+</header>
+<div class="wrapper">
+    <main>
+        <form [formGroup]="productDetailsFormGroup">
+            <ng-template matStepLabel>t-retail Report</ng-template>
+            <h4>t-retail Report</h4>
+
+            <div class="grid">
+                <mat-form-field appearance="outline">
+                    <mat-label>Incident</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="VEHICLE_COLLISION">
+                            Vehicle Collision 
+                        </mat-option>
+                        <mat-option value="STATIONARY_VEHICLE">
+                            Stationary Vehicle
+                        </mat-option>
+                        <mat-option value="PEDESTRIAN_INCIDENT">
+                            Pedestrian Incident
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Comment</mat-label>
+                    <input matInput formControlName="comment">
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Location</mat-label>
+                    <mat-select >
+                        <mat-option value="CURRENT_LOCATION">
+                            Current location
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+            </div>
+
+            <div>
+                <button mat-stroked-button (click)="updateProduct()">Save</button>
+            </div>
+        </form>
+    </main>
+</div>

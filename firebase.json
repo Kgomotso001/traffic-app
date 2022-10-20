@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/t-retail-ui",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

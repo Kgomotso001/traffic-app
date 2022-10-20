@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline">
+    <mat-label>View by region</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="updateMap($event.value);">
+        <mat-option *ngFor="let province of provinces; let i = index" [value]="i">
+            {{province.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div id="map" #map style="height: 500px;"></div>
+<script type="module">
+    import { Loader } from 'https://cdn.pika.dev/google-maps';
+    // todo: see docs bellow
+</script> 

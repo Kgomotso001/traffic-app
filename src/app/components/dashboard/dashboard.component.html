@@ -1,0 +1,62 @@
+<header>
+  <nav>
+    <div id="left">
+      <div >
+        MY WEB
+      </div>
+      <div id="vertical-rule"></div>
+      <ul>
+        <li>Dashboard</li>
+      </ul>
+    </div>
+    <div id="right">
+      <div id="profile" [matMenuTriggerFor]="menu">
+        <mat-icon>account_box</mat-icon>
+      </div>
+      <mat-menu #menu="matMenu">
+        <app-account></app-account>
+      </mat-menu>
+    </div>
+  </nav>
+</header>
+<div class="wrapper">
+  <main>
+    <div id="heading">
+      <h3>Statistics</h3>
+
+    </div>
+    <div id="stats">
+
+      <div class="stat" (click)="assignComponent('users')">
+        <div class="icon">
+          <mat-icon>account_balance</mat-icon>
+        </div>
+        <div class="details">
+          <h3>User</h3>
+          <h4>5</h4>
+        </div>
+      </div>
+
+      <div class="stat" (click)="assignComponent('reports')">
+        <div class="icon">
+          <mat-icon>local_offer</mat-icon>
+        </div>
+        <div class="details">
+          <h3>Reports</h3>
+          <h4>10</h4>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- <mat-card> -->
+      <h1><ng-container *ngComponentOutlet="selectedComponent"></ng-container></h1>
+    <!-- </mat-card> -->
+
+  </main>
+
+</div>
+
+
+<input type="file" name="file" id="file" #inputfile hidden (change)="onFileSelected($event)" />

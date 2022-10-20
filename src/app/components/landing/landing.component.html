@@ -1,0 +1,109 @@
+<header>
+  <nav id="desktop">
+    <div id="left">
+      <div (click)="scroll(home)">
+        MY t-retail APP
+      </div>
+      <div id="vertical-rule"></div>
+      <ul>
+        <li (click)="scroll(contacts)">Contacts</li>
+      </ul>
+    </div>
+    <div id="right">
+      <ng-container *ngIf="!user; else elseTemplate">
+        <ul>
+          <li (click)="login('login')">Login</li>
+          <li (click)="login('register')" id="register">Register</li>
+        </ul>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div id="row">
+          <div (click)="report()">Report  | </div>
+          <div> {{user.firstName + ' ' + user.lastName | titlecase}}</div>
+          <div id="profile" [matMenuTriggerFor]="menu">
+            <mat-icon>account_box</mat-icon>
+          </div>
+        </div>
+        <mat-menu #menu="matMenu">
+          <app-account></app-account>
+        </mat-menu>
+      </ng-template>
+
+    </div>
+  </nav>
+  <nav id="mobile">
+    <div id="left">
+      <div (click)="scroll(home)">
+        MY WEB
+      </div>
+    </div>
+
+    <div id="row">
+
+      <div id="right">
+        <button mat-icon-button id="expandMenu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div id="menu-items">
+
+    <ng-container *ngIf="!user; else elseTemplate">
+      <ol>
+        <li (click)="login('login')">Login</li>
+        <li (click)="login('register')" id="register">Register</li>
+      </ol>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div id="row">
+        <div>{{user.firstName + ' ' + user.lastName | titlecase}}</div>
+        <div id="profile" [matMenuTriggerFor]="menu">
+          <mat-icon>account_box</mat-icon>
+        </div>
+      </div>
+      <mat-menu #menu="matMenu">
+        <app-account></app-account>
+      </mat-menu>
+    </ng-template>
+  </div>
+</header>
+
+<section #home>
+ 
+</section>
+<main>
+  
+  <div class="wrapper" #about>
+    
+    <div id="about" style="margin-top: 100px">
+     
+  <ng-container>
+    <div id="heat-map" style="height: 640px; width: 100%;">
+      <app-heatmap [mapData]="hotspotsPrivate"></app-heatmap>
+    </div>
+  </ng-container>
+    </div>
+
+  </div>
+
+</main>
+<footer #contacts>
+  <div class="h3">Get in touch with us</div>
+  <div class="h4">infor@t-retail.com</div>
+
+</footer>
+<div id="map">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3589.7095596679696!2d28.171961!3d-25.879034899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9565b00a149e5b%3A0x47820eef459c5952!2s300%20Witch-Hazel%20Ave%2C%20Eco-Park%20Estate%2C%20Centurion%2C%200144!5e0!3m2!1sen!2sza!4v1659880580188!5m2!1sen!2sza" width="1600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+
+<div id="loadingScreen" *ngIf="splash">
+  <div class="lds-facebook">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+

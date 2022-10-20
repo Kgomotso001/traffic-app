@@ -1,0 +1,149 @@
+<div id="toggles">
+  <div (click)="login = true; toggle()" [ngClass]="{'active': !login}">
+    Log in
+  </div>
+  <div (click)="login = false; toggle()" [ngClass]="{'active': login}">
+    Register
+  </div>
+</div>
+<div class="wrapper">
+
+  <ng-container *ngIf="login; else registerTemplate">
+
+    <ng-container *ngIf="!reset; else resetPasswordTemplate">
+
+
+      <form [formGroup]="signInForm" (ngSubmit)="userSignIn(signInFormDirective)" #signInFormDirective="ngForm">
+        <div id="error" *ngIf="error.state" class="animate__animated animate__bounce">
+          <mat-icon>error_outline</mat-icon> <span>{{error.message}}</span>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email address</mat-label>
+          <input type="email" matInput formControlName="emailAddress">
+          <mat-icon matPrefix>mail</mat-icon>
+          <mat-error>
+            Email {{errorMessage('emailAddress', signInForm)}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error>
+            Password {{errorMessage('password', signInForm)}}
+          </mat-error>
+        </mat-form-field>
+        <div id="login">
+
+          <button mat-raised-button type="submit" [disabled]="loading || signInForm.status == 'INVALID'">
+            <ng-container *ngIf="loading; else elseTemplate">
+              LOGGING IN...
+            </ng-container>
+            <ng-template #elseTemplate>
+              LOG IN
+            </ng-template>
+
+          </button>
+          <span class = "txt-btn"  (click)="reset = true; toggle()">Forgot your password?</span>
+        </div>
+      </form>
+    </ng-container>
+    <ng-template #resetPasswordTemplate>
+
+      <form [formGroup]="resetPasswordForm" (ngSubmit)="resetPassword(resetFormDirective)" #resetFormDirective="ngForm">
+        <div id="positive" *ngIf="resp.state" class="animate__animated animate__bounce">
+          <mat-icon>error_outline</mat-icon> <span>{{resp.message}}</span>
+        </div>
+
+        <div id="error" *ngIf="error.state" class="animate__animated animate__bounce">
+          <mat-icon>error_outline</mat-icon> <span>{{error.message}}</span>
+        </div>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email address</mat-label>
+          <input type="email" matInput formControlName="emailAddress">
+          <mat-icon matPrefix>mail</mat-icon>
+          <mat-error>
+            Email {{errorMessage('emailAddress', resetPasswordForm)}}
+          </mat-error>
+        </mat-form-field>
+
+        <div id="login">
+
+          <button mat-raised-button type="submit" [disabled]="loading || resetPasswordForm.status == 'INVALID'">
+            <ng-container *ngIf="loading; else elseTemplate">
+              RESETTING...
+            </ng-container>
+            <ng-template #elseTemplate>
+              RESET
+            </ng-template>
+
+          </button>
+          <span  class = "txt-btn"  (click)="reset = false; toggle()">Login to your account?</span>
+        </div>
+      </form>
+    </ng-template>
+
+
+
+
+  </ng-container>
+
+  <ng-template #registerTemplate>
+    <form [formGroup]="signUpForm" (ngSubmit)="userSignUp(signUpFormDirective)" #signUpFormDirective="ngForm">
+      <div id="error" *ngIf="error.state" class="animate__animated animate__bounce">
+        <mat-icon>error_outline</mat-icon> <span>{{error.message}}</span>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error>
+          First name {{errorMessage('firstName', signUpForm)}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error>
+          Last name {{errorMessage('lastName', signUpForm)}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email address</mat-label>
+        <input type="email" matInput formControlName="emailAddress">
+        <mat-icon matPrefix>mail</mat-icon>
+        <mat-error>
+          Email {{errorMessage('emailAddress', signUpForm)}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-error>
+          Password {{errorMessage('password', signUpForm)}}
+        </mat-error>
+      </mat-form-field>
+      <div id="login">
+        <small>By signing up you agree to the terms and conditions of the platform</small>
+        <button mat-raised-button type="submit" [disabled]="loading || signUpForm.status == 'INVALID'">
+          <ng-container *ngIf="loading; else elseTemplate">
+            SIGNING UP...
+          </ng-container>
+          <ng-template #elseTemplate>
+            SIGN UP
+          </ng-template>
+        </button>
+      </div>
+    </form>
+
+
+
+  </ng-template>
+
+
+
+</div>

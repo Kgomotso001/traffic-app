@@ -1,0 +1,33 @@
+#heading {
+  h3 {
+    margin: 0 0 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+#controls {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 20px;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    margin-top: 3px;
+    height: 53px;
+  }
+
+
+}
+
+table {
+  width: 100%;
+  background: #F2F3F5;
+}
+
+mat-paginator {
+  background: #F2F3F5;
+}
