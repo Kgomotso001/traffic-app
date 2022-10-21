@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Router } from '@angular/router';
 import { UsersService } from "../../services/users/users.service";
+import { ReportsService } from "src/app/services/reports/reports.service";
 
 @Component({
   selector: 'app-create-product',
@@ -14,17 +15,20 @@ export class CreateProductComponent implements OnInit {
   productDetailsFormGroup: FormGroup;
 
 
+  user;
+  location;
   constructor(
     private _formBuilder: FormBuilder,
-    private productSrvc: ProductsService,
     private router: Router,
     private usersService: UsersService,
+    private reportsServices: ReportsService,
 
   ) {
 
   }
 
   ngOnInit(): void {
+    this.getLocation();
     this.productDetailsFormGroup = this._formBuilder.group({
       comment: [null,
         [
@@ -38,7 +42,7 @@ export class CreateProductComponent implements OnInit {
 
     this.usersService.getActiveUser().subscribe(
       resp => {
-        console.log(resp);
+        this.user = resp;
       }
     )
   }
@@ -47,8 +51,37 @@ export class CreateProductComponent implements OnInit {
   updateProduct() {
     // return this.router.navigate(['dashboard/'])
     let report = {
-
+      userId: this.user.userId,
+      incident: this.productDetailsFormGroup.value.status,
+      comment: this.productDetailsFormGroup.value.comment,
+      location: {
+        latitude: this.location.latitude,
+        longitude: this.location.longitude,
+      }
     }
+    //// console.log(report);
+    this.reportsServices.createReport(report).then(
+      resp => {
+        ////console.log(resp);
+      }
+    ).catch(
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getLocation() {
+    const successCallback = (position) => {
+      ////console.log(position);
+      this.location = position.coords;
+      ////console.log(this.location);
+    };
+
+    const errorCallback = (error) => {
+      console.log(error);
+    };
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   }
 
 

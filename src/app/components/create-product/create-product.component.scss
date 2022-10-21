@@ -203,6 +203,12 @@ main {
   }
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
 table {
   width: 100%;
   background: #F2F3F5;
