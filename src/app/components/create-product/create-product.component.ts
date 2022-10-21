@@ -48,7 +48,7 @@ export class CreateProductComponent implements OnInit {
   }
 
 
-  updateProduct() {
+  createReport() {
     // return this.router.navigate(['dashboard/'])
     let report = {
       userId: this.user.userId,
