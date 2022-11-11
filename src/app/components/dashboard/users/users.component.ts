@@ -20,61 +20,59 @@ export interface Users {
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-
-  displayedColumns: string[] = [ 'firstName', 'lastName', 'emailAddress', 'createdAt', 'action'];
+  displayedColumns: string[] = [
+    'firstName',
+    'lastName',
+    'emailAddress',
+    'createdAt',
+    'action',
+  ];
   users: Users;
   dataSource;
   loading;
+  userCount;
 
-  constructor(
-    private usersService: UsersService,
-    private dialog: MatDialog,
-  ) {
-
-  }
+  constructor(private usersService: UsersService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getUsers();
   }
 
-  getUsers(){
+  getUsers() {
     this.loading = true;
-    this.usersService.getUsers().then(
-      resp => {
+    this.usersService
+      .getUsers()
+      .then((resp) => {
         this.users = resp.users;
+        this.userCount = resp.count;
         console.log(this.users);
         this.dataSource = this.users;
         this.loading = false;
-      }
-    ).catch(
-      error => {
+        console.log(this.userCount);
+      })
+      .catch((error) => {
         this.loading = false;
-      }
-    )
+      });
   }
 
-  deleteUser(user){
+  deleteUser(user) {
     this.loading = true;
     let userId = user.userId;
-    this.usersService.deleteUser(userId).then(
-      resp => {
+    this.usersService
+      .deleteUser(userId)
+      .then((resp) => {
         // console.log(resp);
         this.loading = false;
-      }
-    )
-    .catch(
-      error => {
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    )
+      });
   }
 
-  createUser(){
-    this.dialog.open(UsersDialogComponent,
-        {width: '250px'}
-      );
+  createUser() {
+    this.dialog.open(UsersDialogComponent, { width: '250px' });
   }
 }

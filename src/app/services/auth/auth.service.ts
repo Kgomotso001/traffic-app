@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import * as firebase from "firebase/app";
+// import * as firebase from "firebase/app";
 import "firebase/analytics";
-import "firebase/auth";
+// import "firebase/auth";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore'
 import { UsersService } from '../users/users.service';
 
 
@@ -109,7 +112,7 @@ export class AuthService {
 
 
     //console.log(user);
-    
+
 
     return new Promise((resolve, reject) => {
 

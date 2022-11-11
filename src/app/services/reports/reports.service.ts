@@ -17,4 +17,10 @@ export class ReportsService {
       headers: this.headers,
     }).toPromise();
   }
+  getReports(){
+    return this.http.get<any>(`${this.baseUrl}reports`,{ headers: this.headers }).toPromise();
+  }
+  getAddress(lat,lng){
+    return this.http.get<any>(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyCKMeXCwfKVZhQkduS-RCM5_nA3Gwb7PCQ`).toPromise();
+  }
 }
