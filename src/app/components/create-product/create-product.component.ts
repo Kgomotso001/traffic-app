@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Router } from '@angular/router';
-import { UsersService } from "../../services/users/users.service";
-import { ReportsService } from "src/app/services/reports/reports.service";
-
+import { UsersService } from '../../services/users/users.service';
+import { ReportsService } from 'src/app/services/reports/reports.service';
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.scss']
+  styleUrls: ['./create-product.component.scss'],
 })
 export class CreateProductComponent implements OnInit {
-
   productDetailsFormGroup: FormGroup;
-
 
   user;
   location;
@@ -21,32 +23,26 @@ export class CreateProductComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private router: Router,
     private usersService: UsersService,
-    private reportsServices: ReportsService,
-
+    private reportsServices: ReportsService
   ) {
-
+    this.usersService.getActiveUser().subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {
     this.getLocation();
     this.productDetailsFormGroup = this._formBuilder.group({
-      comment: [null,
-        [
-          Validators.maxLength(255),
-          Validators.minLength(2)
-        ]
-      ],
+      comment: [null, [Validators.maxLength(255), Validators.minLength(2)]],
       status: ['', Validators.required],
-
     });
 
-    this.usersService.getActiveUser().subscribe(
-      resp => {
-        this.user = resp;
-      }
-    )
-  }
+    this.usersService.getActiveUser().subscribe((resp) => {
+      this.user = resp;
+      console.log(this.user);
 
+    });
+  }
 
   updateProduct() {
     // return this.router.navigate(['dashboard/'])
@@ -57,18 +53,17 @@ export class CreateProductComponent implements OnInit {
       location: {
         latitude: this.location.latitude,
         longitude: this.location.longitude,
-      }
-    }
+      },
+    };
     //// console.log(report);
-    this.reportsServices.createReport(report).then(
-      resp => {
+    this.reportsServices
+      .createReport(report)
+      .then((resp) => {
         ////console.log(resp);
-      }
-    ).catch(
-      error => {
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    )
+      });
   }
 
   getLocation() {
@@ -83,6 +78,4 @@ export class CreateProductComponent implements OnInit {
     };
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   }
-
-
 }

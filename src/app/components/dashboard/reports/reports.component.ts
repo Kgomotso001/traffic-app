@@ -40,7 +40,6 @@ export class ReportsComponent implements OnInit {
         this.reports = resp.reports;
         console.log(this.reports);
         this.dataSource = this.reports;
-        this.loading = false;
         this.getAddress();
       })
       .catch((error) => {
@@ -48,21 +47,26 @@ export class ReportsComponent implements OnInit {
       });
   }
   getAddress() {
-
-
     let report;
     report = this.reports;
 
-    report.forEach(element => {
-
+    report.forEach((element) => {
       this.reportServ
-    .getAddress(element.location.latitude, element.location.longitude)
-    .then((resp) => {
-      console.log(resp);
-    })
-    .catch((error) => {
-      this.loading = false;
+        .getAddress(element.location.latitude, element.location.longitude)
+        .then((resp) => {
+          console.log(resp);
+          if (resp.status == 'OK') {
+            element['address'] = resp.results[0].formatted_address;
+          } else {
+            element['address'] = 'Unknown';
+          }
+        })
+        .catch((error) => {
+          this.loading = false;
+        });
     });
-    });
+    this.loading = false;
+    console.log(report);
+    this.reports = report;
   }
 }

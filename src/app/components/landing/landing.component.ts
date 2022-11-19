@@ -622,6 +622,7 @@ export class LandingComponent implements OnInit {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   }
 
+
   report() {
     return this.router.navigate(['create-product/']);
   }

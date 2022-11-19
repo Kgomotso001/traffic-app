@@ -13,22 +13,22 @@ export class ProductsService {
   constructor(private http : HttpClient) { }
 
   getProducts(): Promise<any> {
-    return this.http.get<any>(`${this.baseUrl}products`, {
+    return this.http.get<any>(`${this.baseUrl}reports`, {
       headers: this.headers,
     }).toPromise();
   }
   getUpdateProduct(id, product): Promise<any> {
-    return this.http.put<any>(`${this.baseUrl}products/${id}`, product, {
+    return this.http.put<any>(`${this.baseUrl}reports/${id}`, product, {
       headers: this.headers,
     }).toPromise();
   }
   createProduct( product): Promise<any> {
-    return this.http.post<any>(`${this.baseUrl}products`, product, {
+    return this.http.post<any>(`${this.baseUrl}reports`, product, {
       headers: this.headers,
     }).toPromise();
   }
   getDeleteProduct(id): Promise<any> {
-    return this.http.delete<any>(`${this.baseUrl}products/${id}`, {
+    return this.http.delete<any>(`${this.baseUrl}reports/${id}`, {
       headers: this.headers,
     }).toPromise();
   }

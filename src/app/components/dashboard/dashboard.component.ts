@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { VouchersService } from 'src/app/services/vouchers/vouchers.service';
 import { UsersComponent } from '../dashboard/users/users.component';
 import { ReportsComponent } from '../dashboard/reports/reports.component';
+import { ReportsService } from 'src/app/services/reports/reports.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -128,6 +129,8 @@ export class DashboardComponent implements OnInit {
   filename;
   fileExtension = null;
   userCount;
+  reportCount;
+  user;
 
   loading = true;
 
@@ -139,13 +142,15 @@ export class DashboardComponent implements OnInit {
     private signPostSrvc: SignPostService,
     private productSrvc: ProductsService,
     private userSrvc: UsersService,
-    private router: Router
+    private router: Router,
+    private reportServ: ReportsService
   ) {
     this.userSrvc.getActiveUser().subscribe((user) => {
       //console.log(user);
       if (!user || user.role != 'ADMIN') {
         this.router.navigate(['/']);
       }
+      this.user = user;
     });
   }
 
@@ -170,6 +175,18 @@ export class DashboardComponent implements OnInit {
         //console.log(error);
       });
     this.getUsers();
+    this.getReport();
+  }
+  getReport() {
+    this.loading = true;
+    this.reportServ
+      .getReports()
+      .then((resp) => {
+        this.reportCount = resp.count;
+      })
+      .catch((error) => {
+        this.loading = false;
+      });
   }
   getUsers() {
     this.loading = true;
@@ -178,6 +195,7 @@ export class DashboardComponent implements OnInit {
       .then((resp) => {
         this.userCount = resp.count;
         console.log(this.userCount);
+        // this.users = resp.users;
       })
       .catch((error) => {
         this.loading = false;
